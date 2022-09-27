@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script>
+        let product = {
+            name: '아이스크림',
+            price: 12000
+        };
+        let person = {
+            name: '홍길동',
+            eat: function(food) {
+                alert(this.name + '이 ' + food + '을/를 먹습니다.'); 
+                //자기 객체니까 this.name
+                //script는 내부에서 this를 생략하면 인식하지 못한다
+                //java에서는 지역변수, 멤버변수가 구분되면 this가 생략 가능했음
+            }
+        };
+        person.eat('밥');
+    </script>
+</head>
+<body>
+
+</body>
+</html>

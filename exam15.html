@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script>
+        let product = {
+            name: 'Java Script',
+            price: '23000원',
+            language: '한국어',
+            supportOS: 'Win Linux IOS'
+            // 키 : 값
+        };
+        //출력
+        let output = '';
+        for(let key in product) {
+            output += 'ㅇ' + key + '\n';
+        }
+        alert(output);
+        
+        /* 키와 값 둘다 나오게 함
+        let output = '';
+        for(let key in product) {
+            output += 'ㅇ' + key + ':' + product[key] + '\n';
+        }
+        alert(output);
+        */
+    </script>
+</head>
+<body>
+
+</body>
+</html>

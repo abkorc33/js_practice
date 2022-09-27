@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>행맨</title>
+    <style>
+    /*class속성값이 letters인 모든 요소의 스타일을 지정한다.*/
+    .letters {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        border: 2px;
+        border-style: double;
+        margin: 5px;
+        padding: 5px;
+        color: pink;
+        background-color: #dbf;
+        font-family: "Courier New", Courier, monospace;
+    }
+    /*class속성이 blacks인 모든 요소의 스타일을 지정한다.*/
+    .blanks {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        border: none;
+        margin: 5px;
+        padding: 5px;
+        color: #000;
+        background-color: #fff;
+        font-family: "Courier New", Courier, monospace;
+        text-decoration: underline;
+        font-size: 24px;
+    }
+    </style>
+    <!--defer는 외부파일을 호출하는 script요소
+        외부파일을 이 문서의 나머지 부분과 동시에 로딩하라는 지시어를 포함한다.-->
+    <script src="words.js" defer>
+        let ctx;    // 모든 그리기에 사용할 변수
+        let thingelem;  // 생성된 요소를 저장할 변수
+
+        // 알파벳 버튼에 사용할 모든 알파벳 글자를 정의
+        let alphabet = "abcefghijklmnopqrstuvwxyz";
+        let alphabety = 300;    // 모든알파벳 버튼의 세로 위치
+        let alphabetx = 20; // 첫번째 알파벳 버튼의 가로 위치
+        let alphabetwidth = 25; // 알파벳 요소에 할당된 너비
+        let secret; // 문제 단어를 저장할 변수
+        let lettersguessed = 0; // 찍은 글자의 카운트를 저장할 변수
+        let secretx = 160;  // 문제 단어의 가로 시작 위치
+        let secrety = 50;   // 문제 단어의 세로 시작 위치
+        let secretwidth = 50;   // 문제 단어를 표시할 때 글자마다 할당되는 너비
+
+        let gallowscolor = "brown"; // 교수대 색상
+        let facecolor = "tan"   // 얼굴 색상
+        let bodycolor = "tan"   // 몸통 색상
+        let noosecolor = "#f60";    // 올가미 색상
+        let bodycenterx = 70;   // 몸의 가로 위치
+        
+        // 교수형 집행의 각 단계를 그리는 함수를 순서대로 저장할 steps배열
+        let steps = [
+            drawgallows,    // 교수대 그리기 함수
+            drawhead,   // 머리 그리기 함수
+            drawbody,   // 몸통 그리기 함수
+            drawrightarm,   // 오른쪽 팔 그리기 함수
+            drawleftarm,    // 왼쪽 팔 그리기 함수
+            drawrightleg,   // 오른쪽 다리 그리기 함수
+            drawleftleg,    // 왼쪽 다리 그리기 함수
+            drawnoose,  // 올가미 그리기 함수
+        ];
+
+        let cur = 0;    // steps 배열 안의 다음번 그리기를 참조할 변수
+
+        // 단두대 그리기 함수
+        function drawgallows() {
+            ctx.lineWidth = 8;  // 선 두께 지정
+            ctx.strokeStyle = gallowscolor; // 색상 지정
+            ctx.beginPath();    // 그리기 패스 시작
+            ctx.moveTo( 2, 180);  // 첫 위치로 이동
+            ctx.lineTo(40, 180);    // 선 그리기
+            ctx.moveTo(20, 180);  // 위치로 이동
+            ctx.lineTo(20, 40);    // 선 그리기
+            ctx.moveTo( 0, 40);  // 위치로 이동
+            ctx.lineTo(80, 40);    // 선 그리기
+            ctx.stroke();   // 전체 패스를 그린다.
+            ctx.closePath();    // 패스 닫기
+        }
+
+        // 사형수의 머리를 그리는 함수
+        function drawhead() {
+            ctx.lineWidth = 3;  // 선 두께 지정
+            ctx.strokeStyle = facecolor; // 색상 지정
+            // 타원, 원의 크기를 조정하기 전에 저장
+            ctx.save(); // 좌표계의 현재 단계를 저장한다.
+            ctx.scale(.6, 1);   // 원 크기 조정(x축을 60%로 압축)
+            ctx.beginPath();    // 그리기 패스 시작
+            // 원을 그린다, x좌표는 크기가 조정된 좌표계의 비율에 맞게 교정된다.
+            // 닫힌 원이 타원이 된다.
+            ctx.arc(bodycenterx/.6, 80, 10, 0, Math.PI*2, false);
+            ctx.stroke();   // 전체 패스를 그린다.
+            ctx.closePath();    // 패스 닫기
+            ctx.restore();  // 크기 조정 전의 좌표로 돌아간다.
+        }
+
+        // 몸(선 하나)을 그리는 함수
+        function drawbody() {
+            ctx.strokeStyle = bodycolor;
+            ctx.beginPath();
+            ctx.moveTo(bodycenterx,90);
+            ctx.lineTo(bodycenterx,125);
+            ctx.stroke();
+            ctx.closePath();
+        }
+
+        // 오른쪽 팔을 그리는 함수
+        function drawrightarm() {
+            ctx.beginPath();
+            ctx.moveTo(bodycenterx,100);
+            ctx.lineTo(bodycenterx+20,110);
+            ctx.stroke();
+            ctx.closePath();
+        }
+
+        // 왼쪽 팔을 그리는 함수
+        function drawleftarm() {
+            ctx.beginPath();
+            ctx.moveTo(bodycenterx,100);
+            ctx.lineTo(bodycenterx-20,110);
+            ctx.stroke();
+            ctx.closePath();
+
+        }
+
+        // 오른쪽 다리를 그리는 함수
+        function drawrightleg() {
+            ctx.beginPath();
+            ctx.moveTo(bodycenterx,125);
+            ctx.lineTo(bodycenterx+10,155);
+            ctx.stroke();
+            ctx.closePath();
+        }
+
+        // 왼쪽 다리를 그리는 함수
+        function drawleftleg() {
+            ctx.beginPath();
+            ctx.moveTo(bodycenterx,125);
+            ctx.lineTo(bodycenterx-10,155);
+            ctx.stroke();
+            ctx.closePath();
+        }
+
+        // 올가미를 그리는 함수
+        function drawnoose() {
+            ctx.strokeStyle = noosecolor;
+            ctx.beginPath();
+            ctx.moveTo(bodycenterx-10,40);
+            ctx.lineTo(bodycenterx-5,95);
+            ctx.stroke();
+            ctx.closePath();
+            ctx.save();         //좌표계 저장
+            ctx.scale(1,.3);   //크기 조정(그림을 세로로 압축)
+            ctx.beginPath();
+            ctx.arc(bodycenterx,95/.3,8,0,Math.PI*2,false);
+            ctx.stroke();
+            ctx.closePath();
+            ctx.restore();
+            drawneck();         //올가미 위에 목을 그린다.
+            drawhead();         //올가미 위에 머리를 그린다.
+        }
+
+        // 목을 그리는 함수
+        function drawneck() {
+            ctx.strokeStyle=bodycolor;
+            ctx.beginPath();
+            ctx.moveTo(bodycenterx,90);
+            ctx.lineTo(bodycenterx,95);
+            ctx.stroke();
+            ctx.closePath();
+        }
+
+
+        // 문서 로딩 시에 호출되는 함수
+        function init() {
+            // 캔버스 상의 모든 그리기에 사용할 변수를 지정한다.
+            ctx.document.getElementById('canvas').getContext('2d');
+            // 게임을 설정하는 함수를 호출한다.
+            setupgame();
+            ctx.font = "bold 20pt Arial";
+        }
+
+        // 게임을 설정하는 함수
+        function setupgame() {
+            let i;  // 반복문에 사용할 변수 선언
+            let x;  // 가로 위치 저장용 변수 선언
+            let y;  // 세로 위치 저장용 변수 선언
+            let uniqueid;   // 생성된 HTML 요소 각각에 사용할 변수 선언
+            let an = alphabet.length;   // 알파벳 갯수 26개
+
+            // for 반복문을 사용하여 알파벳 버튼 생성
+            for(i = 0; i < an; i++) {
+                uniqueid = "a" + String(i); // 고유한 아이디 생성
+                // document.createElement(HTML요소) : 지정된 html요소를 생성한다.
+                d = document.createElement('alphabet');
+
+                // div의 class속성값을 letters로 지정하고, 고유 id를 지정하고,
+                // 알파벳 i번째 글자를 내용 글로 지정한다.
+                d.innerHTML = (
+                "<div class='letters' id='" + uniqueid + "'>" + alphabet[i] + "</div>");
+
+                // body요소에 추가한다.
+                document.body.appendChild(d);
+
+
+                // id로 (알파벳 버튼)요소를 가져온다.
+                thingelem = document.getElementById(uniqueid);
+                x = alphabetx + alphabetwidth * i;  // 가로위치를 계산하여 지정한다.
+                y = alphabety;  // 세로위치를 지정한다.
+
+                // top 속성에 세로 위치를 지정한다.
+                thingelem.style.top = String(y) + "px";
+                // left 속성에 가로 위치를 지정한다.
+                thingelem.style.left = String(x) + "px";
+
+                // 마우스 클릭 이벤트에 대한 이벤트 핸들러를 지정한다.
+                //thingelem.addEventListener('click', pickelement, false);
+            }
+
+            // 단어 중 하나의 인덱스를 무작위로 선택한다.
+            let ch = Math.floor(Math.random()*words.length);
+            // 무작위로 선택된 인덱스에 해당하는 단어를 secret에 저장한다.
+            secret = words[ch];
+
+            // 추출된 문제의 단어길이만큼 밑줄을 반복해서 그린다.
+            for(i = 0; i < secret.length; i++) {
+                uniqueid = "s" + String(i); // 단어의 고유 아이디 생성
+
+                // 그 단어에 해당하는 요소를 생성
+                d = document.createElement('secret');
+
+                // class 속성값을 blanks로 지정하고,  
+                // id속성값을 uniqueid가 생성한 단어로 지정한다.
+                // 내용 글은 밑줄로 한다.
+
+                d.innerHTML = (
+                    "<div class='blanks' id='" + uniqueid + "'> __ </div>"
+                );
+
+                // 생성된 요소를 body의 하위 요소로 추가한다.
+                document.body.appendChild(d);
+
+                // 생성된 요소를 가져온다.
+                thingelem = document.getElementById(uniqueid);
+
+                // 요소의 가로 위치를 계산하여 지정한다.
+                x = secretx + secretwidth * i;
+                // 세로위치 지정
+                y = secrety;
+
+                // top속성에 세로 위치를 지정한다.
+                thingelem.style.top = String(y) + "px";
+                // left속성에 가로 위치를 지정한다.
+                thingelem.style.left = String(x) + "px";
+
+            }
+
+            // steps 배열의 첫 함수를 그린다.(교수대)
+            steps[cur]();
+
+            // 다음 단계의 교수형진행을 위해 cur값을 증가시킨다.
+            cur++;
+
+            // HTML 페이지의 새로고침을 방지하기 위해서 false를 반환한다.
+            return false;
+
+        }
+
+        // 단어를 클릭한 결과로 호출되는 함수
+        function pickelement(ev) {
+            let not = true;
+            // 내용 글 추출 : this가 참조하는 객체에 있는 글자
+            let picked = this.textContext;
+
+            let i;  // 반복자
+            let j;  // 반복자
+            let uniqueid;   // 요소의 고유 아이디 생성에 사용될 변수
+            let thingelem;  // 요소저장
+            let out;    // 안내문구 표시
+
+            // 문제 단어에 들어있는 모든 글자를 반복문을 통해서 검사한다.
+            for(i = 0; i < secret.length; i++) {
+                // 플레이어가 선택한 글자가 문제 단어의 이 글자와 같으면
+                if(picked == secret[i]) {
+                    id = "s" + String(i);   // 이 글자의 아이디를 저장한다.
+                    // 내용 글을 이 글자로 변경한다.(맞춤글자를 화면에 나타나게한다.)
+                    document.getElementById(id).textContent = picked;
+                    not = false;
+                    lettersguessed++;   // 맞춘 글자수를 증가시킨다.
+                    if(lettersguessed == secret.length) {   // 모든 글자 맞추면
+                        ctx.fillStyle = gallowscolor;
+                        out = "이겼습니다!";
+                        ctx.fillText(out, 200, 80); // 글자 좌표
+                        ctx.fillText("다시 하시려면 새로고침..", 200, 120);
+                        // 버튼에 부여한 이벤트를 회수한다.
+                        for(j = 0; j < alphabet.length; j++) {
+                            uniqueid = "a" + String(i); // 이벤트 핸들러를 제거할 id를 알아낸다.
+                            thingelem = document.getElementById(uniqueid);
+                            // 이벤트 핸들러 제거한다.
+                            thingelem.removeEventListener('click', pickelement, false);
+                        }
+                    }
+                }
+            }
+            // 클릭한 알파벳이 문제 단어에 없는 경우
+            if(not) {
+                steps[cur]();   // 글자를 못맞추었으므로 교수형 다음단계 진행
+                cur++;  // 교수형 다음단계 준비하기 위해 카운트 증가
+                if(cur >= steps.length) {   // 진행할 다음단계가 없을경우 게임 끝
+                    for(i = 0; i < secret.length; i++) {
+                        id = "s" + String(i);
+                        // 요소의 참조를 가져와서 그 값을 문제 단어의 해당 글자로 지정한다.
+                        document.getElementById(id).textContent = secret[i];
+                    }
+                ctx. fillStyle = gallowscolor;  // 색상 지정
+                out = "졌습니다..";
+                ctx.fillText(out, 200, 80); // 글자 좌표
+                ctx.fillText("다시 하시려면 새로고침..", 200, 120);
+                // 버튼에 부여한 이벤트를 회수한다.
+                for(j = 0; j < alphabet.length; j++) {
+                        uniqueid = "a" + String(i); // 이벤트 핸들러를 제거할 id를 알아낸다.
+                        thingelem = document.getElementById(uniqueid);
+                        // 이벤트 핸들러 제거한다.
+                        thingelem.removeEventListener('click', pickelement, false);
+                    }
+                }
+            }
+            let id = this.id    // this요소의 id를 추출한다.
+            // 이 고유한 알파벳 버튼을 화면에서 보이지 않게 한다. 
+            document.getElementById(id).style.display = "none";
+
+        }
+
+    </script>
+</head>
+<!--onload=  프로그램이 구동될 때 무엇인가를 작동하게 한다.-->
+<body onload="init();"> <!--init()함수 호출을 지정한 body 시작 태그-->
+    <h1>행맨</h1><br>   <!--게임명-->
+
+    <p>
+        <canvas id="canvas" width="600" height="400">   <!--크기를 지정한 canvas 시작 태그-->
+            <!--canvas요소를 인식하지 못하는 브라우저 사용자에게 보여줄 문구-->
+            이 브라우저는 HTML5의 canvas요소를 지원하지 않습니다.
+        </canvas>
+    </p>
+</body>
+</body>
+</html>

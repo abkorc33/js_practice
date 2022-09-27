@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script>
+        // 짧은 조건문
+        // 참이 확실할 때는 추가 연산을 진행하지 않는다.
+        // 즉, 논리합 연산자의 좌변이 참이면 우변을 실행하지 않는다.
+        // 불리언표현식 || 불리언 표현식이 거짓일 때 실행할 문장
+        // 불리언표현식 && 불리언 표현식이 참일 때 실행할 문장
+        true || alert('true가 실행');
+        false || alert('false가 실행');
+
+        var input = Number(prompt('숫자를 입력해주세요.','숫자'));
+
+        input % 2 == 0 || alert('홀수입니다.');
+        input % 2 == 0 && alert('짝수입니다.');
+    </script>
+</head>
+<body>
+
+</body>
+</html>
