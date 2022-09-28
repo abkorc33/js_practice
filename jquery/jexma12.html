@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="../jquery/jquery-3.6.1.js"></script>   <!--로컬에 파일 갖고오기-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <!--cdn으로 적용하기, 단 인터넷 연결시만 적용됨-->
+    <script>
+        // append() 선택한 요소의 마지막에 새로운 요소나 컨텐츠를 추가한다.
+        // prepend() 선택한 요소의 처음에 새로운 요소나 컨텐츠를 추가한다.
+        $(function() {
+            $("#btnA").on("click", function() {
+                $("#list").append("<li> 새로운 친구를 소개합니다.</li>");
+            });
+            $("#btnP").on("click", function() {
+                $("li").prepend("새로운 친구 ");
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <h1>append() 메서드, prepend() 메서드</h1>
+    <ul id="list">
+        <li>강아지</li>
+        <li>고양이</li>
+        <li>병아리</li>
+    </ul>
+    <button id="btnA">append()</button>
+    <button id="btnP">prepend()</button>
+</body>
+</html>

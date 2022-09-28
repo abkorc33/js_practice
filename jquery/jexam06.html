@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="../jquery/jquery-3.6.1.js"></script>   <!--로컬에 파일 갖고오기-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <!--cdn으로 적용하기, 단 인터넷 연결시만 적용됨-->
+    <script>
+        // has선택자
+        // 선택한 요소 중에서 지정한 선택자와 일치하는 자손 요소를 갖는 요소를 모두 선택한다.
+        $(function() {
+            $("button").on("click", function(){
+                // $("li:has(span)") span요소를 갖고있는 list라는 뜻
+                $("li:has(span)").text("<span>요소를 가지고 있는 아이템");
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <h1>선택한 요소의 필터링</h1>
+    <ul>
+        <li>첫번째 아이템</li>
+        <li><span>두번째</span> 아이템</li>
+        <li>세번째 아이템</li>
+        <li><span>네번째</span> 아이템</li>
+    </ul>
+    <button>선택한 요소의 필터링</button>
+</body>
+</html>

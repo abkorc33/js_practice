@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="../jquery/jquery-3.6.1.js"></script>   <!--로컬에 파일 갖고오기-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <!--cdn으로 적용하기, 단 인터넷 연결시만 적용됨-->
+    <style>
+        div {margin: 10px;}
+        .content {border: 2px solid magenta;}
+        .wrapper {border: 2px solid green;}
+    </style>
+
+    <script>
+        // wrapAll() : 선택한 모든 요소를 포함하는 새로운 요소를 추가한다.
+        $(function() {
+            $("button").on("click", function() {
+                $(".content").wrapInner("<div class='wrapper'></div>");
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>wrapInner() 메서드</h1>
+    <div class="content">첫 번째 컨텐츠</div>
+    <div class="content">첫 번째 컨텐츠</div>
+    <button>div 요소 추가하기</button>
+</body>
+</html>

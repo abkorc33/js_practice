@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="../jquery/jquery-3.6.1.js"></script>   <!--로컬에 파일 갖고오기-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <!--cdn으로 적용하기, 단 인터넷 연결시만 적용됨-->
+    <script>
+        $(function() {
+            $("p").on("click", function() {
+                $("p").css("color", "red");
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <p>제이쿼리를 시작합니다!</p>
+    <p>마우스로 글씨 클릭하면 빨간색 됨</p>
+</body>
+</html>

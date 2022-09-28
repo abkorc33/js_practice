@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="../jquery/jquery-3.6.1.js"></script>   <!--로컬에 파일 갖고오기-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <!--cdn으로 적용하기, 단 인터넷 연결시만 적용됨-->
+    <script>
+        $(function() {
+            $("button").on("click", function() {
+                var getText = $("h1").html();   // <h1>요소의 텍스트를 읽어오는 getter메서드
+                $("#text").html(getText);
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <h1>.html() 메서드</h1>
+    <p>버튼을 누르면 다음 단락에 새로운 글자를 설정할 수 있다.</p>
+    <button>새로운 글자</button>
+    <p id="text"></p>
+</body>
+</html>

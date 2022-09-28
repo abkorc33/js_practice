@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="../jquery/jquery-3.6.1.js"></script>   <!--로컬에 파일 갖고오기-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <!--cdn으로 적용하기, 단 인터넷 연결시만 적용됨-->
+    <script>
+        $(function() {
+            $("button").on("click", function() {
+                // 체크되어있는 요소를 모두 선택하여 작업한다.
+                // .next() 바로 다음 요소 (span에 적용)
+                $(":checked").next().text("체크된 요소입니다.")
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Form 요소 선택</h1>
+    <form>
+        <input type="checkbox" name="example" value="html" checked/><span>HTML</span><br>
+        <input type="checkbox" name="example" value="jsp"/><span>JSP</span><br>
+        <input type="checkbox" name="example" value="javascript"/><span>JavaScript</span><br>
+        <input type="checkbox" name="example" value="jquery"/><span>JQuery</span><br>
+    </form>
+    <button>확인</button>
+</body>
+</html>

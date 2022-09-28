@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="../jquery/jquery-3.6.1.js"></script>   <!--로컬에 파일 갖고오기-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <!--cdn으로 적용하기, 단 인터넷 연결시만 적용됨-->
+    <script>
+        //  :eq(n) <= 선택한 요소 중에서 인덱스가 n인 요소를 선택한다.
+        // 메서드 체이닝 도중에 .end() 메서드를 사용하면 바로 이전에 선택했던 요소의 집합을 다시 선택할 수 있다.
+        $(function() {
+            $("button").on("click", function() {
+                $("#list")  // id가 "list"인 요소의 자손 요소 중에서
+                    .find("li")    // <li>요소를 모두 선택한 후에
+                        .eq(1).html("두번째 아이템을 선택했습니다.")    // 그중 두번째 요소의 값 결정
+                        .end()  // 다시 id가 "list"인 요소의 자손 요소들 중에서 <li>요소를 모두 선택한 후
+                        .eq(2).html("세번째 아이템도 선택했습니다.")    // 세번째 요소 값 결정
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <h1>method chaining</h1>
+    <p>메서드 체이닝은 반환된 제이쿼리 객체를 이용하면 세미콜론을 사용하지 않고
+        곧바로 다른 제이쿼리 메서드를 호출할 수 있다.<br>
+        이런 방식으로 여러 개의 메서드가 연속적으로 호출되는 것을 메서드 체이닝이라고 한다.
+    </p>
+    <hr>
+    <ul id="list">
+        <li>첫번째 아이템입니다.</li>
+        <li>두번째 아이템입니다.</li>
+        <li>세번째 아이템입니다.</li>
+    </ul>
+    <button>글자 변경</button>
+</body>
+</html>

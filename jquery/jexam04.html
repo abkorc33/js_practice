@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="../jquery/jquery-3.6.1.js"></script>   <!--로컬에 파일 갖고오기-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <!--cdn으로 적용하기, 단 인터넷 연결시만 적용됨-->
+    <script>
+        $(function() {
+            $("button").on("click", function() {
+                // <img> 요소 중에서 alt속성값이 "rabbit"인 요소를 모두 선택한다. 속성은 대괄호[]
+                // 밖에 더블쿼터면 안에는 싱글쿼터, 반대로 해도되고 겹치지만 않으면 됨
+                $("img[alt='rabbit']").attr("src", "..images/cloud.png");
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <h1>HTML 태그 선택자</h1>
+    <img src="../images/rabbit.png" alt="rabbit"><br>
+    <button>속성을 바꾸자</button>
+</body>
+</html>
