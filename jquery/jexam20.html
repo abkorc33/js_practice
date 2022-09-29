@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="../jquery/jquery-3.6.1.js"></script>   <!--로컬에 파일 갖고오기-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <!--cdn으로 적용하기, 단 인터넷 연결시만 적용됨-->
+    <script>
+        $(function() {
+            $("button").on({    // <body> 요소에서
+                click: function() { // click 이벤트가 발생하면
+                    $("#text").html("버튼을 누군가가 눌렀습니다.");
+                } 
+            }, "#btn"); // id가 "btn"인 요소에 이벤트 핸들러 등록
+        });
+
+    </script>
+</head>
+<body>
+    <h1>이벤트의 연결(event binding)</h1>
+    <p>
+    특정요소에서 발생하는 이벤트를 처리하기 위해서는 이벤트 핸들러 함수를 작성해야한다.<br>
+    이렇게 작성된 이벤트 핸들러를 특정 요소에 연결하는 것을 이벤트의 연결이라고 한다.
+    </p>
+    <button id="btn">확인</button>
+    <p id="text"></p>
+</body>
+</html>

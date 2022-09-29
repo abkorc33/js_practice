@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="../jquery/jquery-3.6.1.js"></script>   <!--로컬에 파일 갖고오기-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <!--cdn으로 적용하기, 단 인터넷 연결시만 적용됨-->
+    <script>
+        $(function() {
+            $("button").one("click", function() {
+                // 모든 <button>요소가 처음 클릭되었을 때만 실행된다.
+                $("#text").append("처음으로 버튼을 눌렀습니다.<br>");
+                // 모든 <button>요소가 두 번째 클릭되었을 때부터 실행되는 이벤트핸들러
+                $(this).click(function() {  // this : 현재 작용하고있는 버튼
+                    $("#text").append("그만 누르세요.<br>");
+                });
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <h1>one()</h1>
+    <button>버튼을 눌러보세요.</button>
+    <p id="text"></p>
+</body>
+</html>

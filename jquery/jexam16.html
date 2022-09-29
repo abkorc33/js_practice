@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="../jquery/jquery-3.6.1.js"></script>   <!--로컬에 파일 갖고오기-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <!--cdn으로 적용하기, 단 인터넷 연결시만 적용됨-->
+    
+    <script>
+        // first() : 선택한 요소 중에서 첫번째 요소를 선택한다.
+        // last() : 선택한 요소 중에서 마지막 요소를 선택한다.
+        $(function() {
+            $("#btnFirst").on("click", function() {
+                $("li").first().css({"border": "2px solid green"});
+            });
+            $("#btnLast").on("click", function() {
+                $("li").last().css({"color": "yellow"});
+            });
+
+            $("#btnEqPlus").on("click", function() {
+                $("li").eq(1).css({"border": "3px dotted red"});
+            });
+            $("#btnEqMinus").on("click", function() {
+                $("li").eq(-2).css({"backgroundColor": "gray"}); // 세번째 아이템에 적용
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>first() last() eq()</h1>
+    <ul>
+        <li>첫번째 아이템입니다.</li>
+        <li>두번째 아이템입니다.</li>
+        <li>세번째 아이템입니다.</li>
+        <li>네번째 아이템입니다.</li>
+    </ul>
+    <button id="btnFirst">first()</button>
+    <button id="btnLast">last()</button>
+    <button id="btnEqPlus">first()</button>
+    <button id="btnEqMinus">last()</button>
+</body>
+</html>

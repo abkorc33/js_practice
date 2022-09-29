@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="../jquery/jquery-3.6.1.js"></script>   <!--로컬에 파일 갖고오기-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <!--cdn으로 적용하기, 단 인터넷 연결시만 적용됨-->
+    <script>
+        $(function() {
+            $("#btnSetting").on("click", function() {
+                $("#word").attr("title", "제이쿼리의 즐거움")
+                .css({backgroundColor: "cyan", color: "red"});
+            });
+            $("btnRemove").on("click", function() {
+                $("#word").removeAttr("title").css("color", "blue");
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <h1>attr()</h1>
+    <p>이 단어 <span id="word">DESPERADO</span>에 title 속성을 설정해봅니다.</p>
+    <p>아래의 버튼을 누른 후 단어 위로 마우스를 가져가 보십시오.</p>
+    <button id="btnSetting">속성값 설정</button>
+    <button id="btnRemove">속성값 제거</button>
+</body>
+</html>

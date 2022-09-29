@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="../jquery/jquery-3.6.1.js"></script>   <!--로컬에 파일 갖고오기-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <!--cdn으로 적용하기, 단 인터넷 연결시만 적용됨-->
+    <script>
+    // 이벤트의 위임
+    // 제이쿼리는 이벤트의 위임을 통해 다수의 요소에 공통적으로 적용되는 이벤트 핸들러를
+    // 공통된 조상 요소에 단 한번만 연결하면 동작할 수 있도록 해준다.
+        $(function() {
+            /*  이렇게 만들면 추가된 링크도 작동하지 않게 만들 수 있다.
+                $("ul").on("click", "a", function(event) {
+                event.preventDefault(); // 기본동작을 없앤다.(a의 경우 링크기능 막음)
+                $("#text").append("이 링크는 작동하지 않음")
+            }); */
+            $("ul a").on("click", function(event) {
+                event.preventDefault(); // 기본동작을 없앤다.(a의 경우 링크기능 막음)
+                $("#text").append("이 링크는 작동하지 않음")
+            });
+            // 요소마다 직접 등록된 이벤트 핸들러는 현재 존재하는 <a> 요소에만 연결되며,
+            // 새롭게 추가되는 요소에는 연결되지 않는다.
+            $("button").on("click", function() {
+                $("ul").append('<li><a href="http://daum.net">Daum</a></li>');
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <h1>이벤트 핸들러의 직접 등록</h1>
+    <ul>
+        <li><a href="http://www.google.com">Google</a></li>
+        <li><a href="http://www.naver.com">Naver</a></li>
+    </ul>
+    <p id="text"></p>
+    <button>리스트 추가</button>
+</body>
+</html>

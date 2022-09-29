@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="../jquery/jquery-3.6.1.js"></script>   <!--로컬에 파일 갖고오기-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <!--cdn으로 적용하기, 단 인터넷 연결시만 적용됨-->
+    <script>
+        $(function() {
+            // 모든 <button> 요소에 mouseenter click mouseleave 이벤트를 설정한다.
+            $("button").on("mouseenter click mouseleave", function() {
+                $("#text").append("마우스가 버튼 위에 올라가거나, 클릭하거나, 떠났습니다.<br>")
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <h1>on()</h1>
+    <button>버튼에 마우스를 가져가 보세요.</button>
+    <button>취소</button>
+    <p id="text"></p>
+</body>
+</html>

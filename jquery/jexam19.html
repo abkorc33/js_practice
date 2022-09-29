@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="../jquery/jquery-3.6.1.js"></script>   <!--로컬에 파일 갖고오기-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <!--cdn으로 적용하기, 단 인터넷 연결시만 적용됨-->
+    <script>
+        $(function() {
+            $("button").on({
+                mouseenter: function() {
+                    $("#text").append("큰일났어요. 마우스가 버튼 위에 올라갔어요.");
+                },
+                click: function() {
+                    $("#text").append("마우스를 누르셨어요.<br>");
+                },
+                mouseleave: function() {
+                    $("#text").append("마우스가 집에 간대요.<br>");
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>on()</h1>
+    <p>특정요소에 발생하는 이벤트를 처리하기 위해서는 이벤트 핸들러라는 함수를 작성하여 연결해야합니다,
+        이벤트 핸들러가 연결된 특정요소에서 지정된 타입의 이벤트가 발생하면, 
+        웹브라우저는 연결된 이벤트 핸들러를 실행합니다.
+    </p>
+    <p id="text"></p>
+    <button>버튼 위에 마우스를 가져가거나 눌러보세요.</button>
+</body>
+</html>

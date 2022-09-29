@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="../jquery/jquery-3.6.1.js"></script>   <!--로컬에 파일 갖고오기-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <!--cdn으로 적용하기, 단 인터넷 연결시만 적용됨-->
+    <script>
+        $(function() {
+            $("button").click(function() {
+                $("#singleClickText").css({color: "red", backgroundColor: "yellow"});
+                $("#doubleClickText").css({color: "blue", backgroundColor: "gray"});
+            });
+            $("button").dblclick(function() {
+                $("#singleClickText").css({color: "red", backgroundColor: "gray"});
+                $("#doubleClickText").css({color: "blue", backgroundColor: "yellow"});
+            });
+            $("button").hover(function() {
+                $("#text").append("마우스가 버튼위에 올라갔거나 내려갔습니다.<br>");
+                $("#text").css({color: "green"});
+            })
+        });
+
+    </script>
+</head>
+<body>
+    <h1>double click hover event</h1>
+    <p>버튼을 <span id="singleClickText">한번 클릭</span>하거나 
+        <span id="doubleClickText">더블 클릭</span>해보세요
+    </p>
+    <button>확인</button>
+    <p id="text"></p>
+</body>
+</html>
