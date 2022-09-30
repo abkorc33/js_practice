@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="../jquery/jquery-3.6.1.js"></script>   <!--로컬에 파일 갖고오기-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <!--cdn으로 적용하기, 단 인터넷 연결시만 적용됨-->
+    <style>
+    div { width: 200px; height: 200px; display: none;}
+    #div1 { background-color: red;}
+    #div2 { background-color: green;}
+    #div3 { background-color: blue;}
+    </style>
+    <script>
+        $(function() {
+            $("#btnIn").click(function() {
+                $("#div1").fadeIn();
+                $("#div2").fadeIn("slow");
+                $("#div3").fadeIn(3000);
+            });
+            $("#btnOut").click(function() {
+                $("#div1").fadeOut();
+                $("#div2").fadeOut("slow");
+                $("#div3").fadeOut(3000);
+            });
+            $("#btnToggle").click(function() {
+                $("#div1").fadeToggle();
+                $("#div2").fadeToggle("slow");
+                $("#div3").fadeToggle(3000);
+            });
+            $("#btnTo").click(function() {
+                $("#div1").fadeTo("slow", 0.15);
+                $("#div2").fadeTo("slow", 0.5);
+                $("#div3").fadeTo(3000, 0.7);
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <h1>fade 효과</h1>
+    <h3>아래의 버튼을 누르면 fade효과를 볼 수 있다.</h3>
+    <button id="btnIn">fade In</button>
+    <button id="btnOut">fade Out</button>
+    <button id="btnToggle">fade Toggle</button>
+    <button id="btnTo">fade To</button>
+    <div id="div1"></div><br>
+    <div id="div2"></div><br>
+    <div id="div3"></div><br>
+</body>
+</html>

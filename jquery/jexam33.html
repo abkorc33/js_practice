@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="../jquery/jquery-3.6.1.js"></script>   <!--로컬에 파일 갖고오기-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <!--cdn으로 적용하기, 단 인터넷 연결시만 적용됨-->
+    <style>
+    #panel, #flipDown, #flipUp, #flipToggle {
+        padding: 5px; 
+        text-align: center; 
+        background-color: #e5eecc; 
+        border: solid 2px #c3c3c3;
+    }
+    #panel {
+        padding: 100px; 
+        display: none;
+    }
+    </style>
+    <script>
+        $(function() {
+            $("#flipDown").click(function() {
+                $("#panel").slideDown("slow");
+            });
+            $("#flipUp").click(function() {
+                $("#panel").slideUp("slow");
+            });
+            $("#flipToggle").click(function() {
+                $("#panel").slideToggle("slow");
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <div id="flipDown">여기를 누르면 패널이 내려간다.</div>
+    <div id="flipUp">여기를 누르면 패널이 내려간다.</div>
+    <div id="flipToggle">여기를 누르면 패널이 내려갔다 올라간다.</div>
+    <div id="panel">Hello JQuery!</div>
+</body>
+</html>

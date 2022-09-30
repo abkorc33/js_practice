@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="../jquery/jquery-3.6.1.js"></script>   <!--로컬에 파일 갖고오기-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <!--cdn으로 적용하기, 단 인터넷 연결시만 적용됨-->
+    <script>
+        $(function() {
+            $("#myForm").submit(function() {
+                var name = $("#name").val();
+                var password = $("#password").val();
+
+                alert(name + " : " + password);
+
+                // 기본 이벤트를 제거한다.
+                event.preventDefault();
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <h1>입력 양식 이벤트</h1>
+    <ol>
+        <li>change : 입력 양식의 내용을 변경할 때 발생한다.</li>
+        <li>focus : 입력 양식에 초점을 맞추면 발생한다.</li>
+        <li>focusin : 입력 양식에 초점을 맞추기 바로 전에 발생한다.</li>
+        <li>focusout : 입력 양식에 초점이 사라지기 바로 전에 발생한다.</li>
+        <li>blur : 입력 양식에 초점이 사라지면 발생한다.</li>
+        <li>select : 입력 양식을 선택할 때 발생한다.</li>
+        <li>submit : submit 버튼을 누를 때 발생한다.</li>
+        <li>reset : reset 버튼을 누를 때 발생한다.</li>
+    </ol>
+    <hr>
+    <form id="myForm" method="post" action="inputMember.jsp">
+        <table>
+            <tr>
+                <td>이    름</td>
+                <td><input type="text" name="name" id="name"/></td>
+            </tr>
+            <tr>
+                <td>비밀번호</td>
+                <td><input type="password" name="password" id="password"/></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="확인"/></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
